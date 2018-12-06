@@ -8,7 +8,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace RoboRyanTron.Unite2017.Events
+namespace CaromBilliardsGame.Stolzenberg.Events
 {
     [CustomEditor(typeof(GameEvent))]
     public class EventEditor : Editor
