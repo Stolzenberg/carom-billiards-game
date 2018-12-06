@@ -13,4 +13,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DeveloperDescription: "The maximal speed of the camera rotation \nwhen the player
     is moving the mouse."
-  Value: 10
+  Value: 8
