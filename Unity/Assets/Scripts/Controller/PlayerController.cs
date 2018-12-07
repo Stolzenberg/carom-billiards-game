@@ -1,5 +1,6 @@
 ﻿using System;
 using CaromBilliardsGame.Stolzenberg.Models;
+using CaromBilliardsGame.Stolzenberg.Variables;
 using UnityEngine;
 
 namespace CaromBilliardsGame.Stolzenberg.Controllers
@@ -14,39 +15,37 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         [SerializeField] private BallController ballController;
         [Header("Components")]
         [SerializeField] private SphereCollider sphereCol;
-
-        private float pressedTime;
+        [Header("Variables")]
+        [SerializeField] private FloatReference pressedTimeReference;
 
         private void Update()
         {
             GetPressedTime();
-
-            if (pressedTime > 1)
-            {
-                pressedTime = 1;
-            }
-            if (pressedTime < 0)
-            {
-                pressedTime = 0;
-            }
-
             ApplyForceToBall();
             RotateBallWithCamera();
         }
 
         private void RotateBallWithCamera()
         {
-            Vector3 rotation = cameraController.transform.eulerAngles;
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, rotation.y, transform.eulerAngles.z);
+            if (!ballController.IsMoving)
+            {
+                Vector3 rotation = cameraController.transform.eulerAngles;
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, rotation.y, transform.eulerAngles.z);
+            }
         }
 
         private void GetPressedTime()
         {
+            float pressedTime = pressedTimeReference.Value;
+
             if (Input.GetKey(KeyCode.Space))
             {
-                if (pressedTime <= 1)
+                if (!ballController.IsMoving)
                 {
-                    pressedTime += playerModel.TimeToFullPower * Time.deltaTime;
+                    if (pressedTime <= 1)
+                    {
+                        pressedTime += playerModel.TimeToFullPower * Time.deltaTime;
+                    }
                 }
 
             }
@@ -57,14 +56,26 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
                     pressedTime -= playerModel.TimeToFullPower * Time.deltaTime;
                 }
             }
+
+            pressedTime = Mathf.Clamp(pressedTime, 0, 1);
+
+            pressedTimeReference.Value = pressedTime;
         }
          
         private void ApplyForceToBall()
         {
+            float pressedTime = pressedTimeReference.Value;
+
             if (Input.GetKeyUp(KeyCode.Space))
             {
-                ballController.ApplyForceToBall(transform.forward, playerModel.Force * pressedTime);
+                if (!ballController.IsMoving)
+                {
+                    ballController.ApplyForceToBall(transform.forward, playerModel.Force * pressedTime);
+                    pressedTime = 0;
+                }
             }
+
+            pressedTimeReference.Value = pressedTime;
         }
     }
 }

@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e59b4958d24591418e50282ae6079fa, type: 3}
   m_Name: DefaultPlayer
   m_EditorClassIdentifier: 
-  TimeToFullPower: 1
-  Force: 500
+  TimeToFullPower: 0.5
+  Force: 50

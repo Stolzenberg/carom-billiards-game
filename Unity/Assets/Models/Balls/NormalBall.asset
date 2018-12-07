@@ -9,9 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81f3bc604d01e8a48973858a679aecdb, type: 3}
-  m_Name: RedBall
+  m_Name: NormalBall
   m_EditorClassIdentifier: 
   Size: 1
-  Mass: 1
   Drag: 0
-  AngularDrag: 0.05
