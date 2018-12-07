@@ -11,11 +11,11 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         [SerializeField] private PlayerModel playerModel;
         [Header("Controllers")]
         [SerializeField] private CameraController cameraController;
+        [SerializeField] private BallController ballController;
         [Header("Components")]
         [SerializeField] private SphereCollider sphereCol;
 
         private float pressedTime;
-        private bool moveBall;
 
         private void Update()
         {
@@ -31,16 +31,13 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
             }
 
             ApplyForceToBall();
-
-
-            Vector3 rotation = cameraController.transform.eulerAngles;
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, rotation.y, transform.eulerAngles.z);
+            RotateBallWithCamera();
         }
 
-        private void OnDrawGizmosSelected()
+        private void RotateBallWithCamera()
         {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawLine(transform.position, Vector3.forward * 5);
+            Vector3 rotation = cameraController.transform.eulerAngles;
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, rotation.y, transform.eulerAngles.z);
         }
 
         private void GetPressedTime()
@@ -51,7 +48,6 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
                 {
                     pressedTime += playerModel.TimeToFullPower * Time.deltaTime;
                 }
-                moveBall = false;
 
             }
             else
@@ -60,16 +56,14 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
                 {
                     pressedTime -= playerModel.TimeToFullPower * Time.deltaTime;
                 }
-                moveBall = true;
-
             }
         }
          
         private void ApplyForceToBall()
         {
-            if (moveBall)
+            if (Input.GetKeyUp(KeyCode.Space))
             {
-                transform.Translate(Vector3.forward * (playerModel.Force * pressedTime));
+                ballController.ApplyForceToBall(transform.forward, playerModel.Force * pressedTime);
             }
         }
     }

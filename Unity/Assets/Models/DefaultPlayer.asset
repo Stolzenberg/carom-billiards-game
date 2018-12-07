@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Name: DefaultPlayer
   m_EditorClassIdentifier: 
   TimeToFullPower: 1
-  Force: 1
+  Force: 500
