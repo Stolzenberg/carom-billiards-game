@@ -15,28 +15,11 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         [SerializeField] private SphereCollider sphereCol;
 
         private float pressedTime;
+        private bool moveBall;
 
         private void Update()
         {
-            if (Input.GetKey(KeyCode.Space))
-            {
-                if (pressedTime <= 1)
-                {
-                    pressedTime += playerModel.TimeToFullPower * Time.deltaTime;
-                }
-            }
-            else
-            {
-                if (pressedTime >= 0)
-                {
-                    pressedTime -= playerModel.TimeToFullPower * Time.deltaTime;
-                }
-            }
-
-            if (Input.GetKeyUp(KeyCode.Space))
-            {
-
-            }
+            GetPressedTime();
 
             if (pressedTime > 1)
             {
@@ -47,7 +30,47 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
                 pressedTime = 0;
             }
 
-            print(pressedTime);
+            ApplyForceToBall();
+
+
+            Vector3 rotation = cameraController.transform.eulerAngles;
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, rotation.y, transform.eulerAngles.z);
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(transform.position, Vector3.forward * 5);
+        }
+
+        private void GetPressedTime()
+        {
+            if (Input.GetKey(KeyCode.Space))
+            {
+                if (pressedTime <= 1)
+                {
+                    pressedTime += playerModel.TimeToFullPower * Time.deltaTime;
+                }
+                moveBall = false;
+
+            }
+            else
+            {
+                if (pressedTime >= 0)
+                {
+                    pressedTime -= playerModel.TimeToFullPower * Time.deltaTime;
+                }
+                moveBall = true;
+
+            }
+        }
+         
+        private void ApplyForceToBall()
+        {
+            if (moveBall)
+            {
+                transform.Translate(Vector3.forward * (playerModel.Force * pressedTime));
+            }
         }
     }
 }
