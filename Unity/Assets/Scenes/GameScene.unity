@@ -562,7 +562,6 @@ GameObject:
   - component: {fileID: 508418138}
   - component: {fileID: 508418137}
   - component: {fileID: 508418136}
-  - component: {fileID: 508418140}
   m_Layer: 0
   m_Name: RedBallController
   m_TagString: Ball
@@ -626,18 +625,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &508418140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 508418135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e699c3a2a2674374497adaafccdc1008, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colliderModel: {fileID: 11400000, guid: a62e593672f0fd3458a7309b24b12c03, type: 2}
 --- !u!1 &538514685
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,7 +636,6 @@ GameObject:
   - component: {fileID: 538514689}
   - component: {fileID: 538514688}
   - component: {fileID: 538514687}
-  - component: {fileID: 538514690}
   m_Layer: 0
   m_Name: WallSide (1)
   m_TagString: Wall
@@ -724,18 +710,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 538514685}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &538514690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 538514685}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e699c3a2a2674374497adaafccdc1008, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colliderModel: {fileID: 11400000, guid: 46d4b9711cefb3f48bda732282c2df13, type: 2}
 --- !u!1 &542909486
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,7 +783,6 @@ GameObject:
   - component: {fileID: 733501867}
   - component: {fileID: 733501866}
   - component: {fileID: 733501870}
-  - component: {fileID: 733501871}
   m_Layer: 0
   m_Name: WhiteBallController
   m_TagString: Ball
@@ -892,18 +865,6 @@ MonoBehaviour:
   sphereCol: {fileID: 733501868}
   rigid: {fileID: 733501867}
   viewTransform: {fileID: 168859384}
---- !u!114 &733501871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 733501865}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e699c3a2a2674374497adaafccdc1008, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colliderModel: {fileID: 11400000, guid: a62e593672f0fd3458a7309b24b12c03, type: 2}
 --- !u!1 &775651644
 GameObject:
   m_ObjectHideFlags: 0
@@ -1169,7 +1130,6 @@ GameObject:
   - component: {fileID: 1408952460}
   - component: {fileID: 1408952459}
   - component: {fileID: 1408952458}
-  - component: {fileID: 1408952461}
   m_Layer: 0
   m_Name: WallTop (2)
   m_TagString: Wall
@@ -1244,18 +1204,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1408952456}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1408952461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1408952456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e699c3a2a2674374497adaafccdc1008, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colliderModel: {fileID: 11400000, guid: e595f9d136f270f4a8fb94045c27e04c, type: 2}
 --- !u!1 &1536741082
 GameObject:
   m_ObjectHideFlags: 0
@@ -1336,7 +1284,6 @@ GameObject:
   - component: {fileID: 1644555585}
   - component: {fileID: 1644555584}
   - component: {fileID: 1644555583}
-  - component: {fileID: 1644555586}
   m_Layer: 0
   m_Name: WallSide (2)
   m_TagString: Wall
@@ -1411,18 +1358,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1644555581}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1644555586
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1644555581}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e699c3a2a2674374497adaafccdc1008, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colliderModel: {fileID: 11400000, guid: 46d4b9711cefb3f48bda732282c2df13, type: 2}
 --- !u!1 &1646180716
 GameObject:
   m_ObjectHideFlags: 0
@@ -1434,7 +1369,6 @@ GameObject:
   - component: {fileID: 1646180719}
   - component: {fileID: 1646180718}
   - component: {fileID: 1646180717}
-  - component: {fileID: 1646180721}
   m_Layer: 0
   m_Name: YellowBallController
   m_TagString: Ball
@@ -1498,18 +1432,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1646180721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1646180716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e699c3a2a2674374497adaafccdc1008, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colliderModel: {fileID: 11400000, guid: a62e593672f0fd3458a7309b24b12c03, type: 2}
 --- !u!1 &1646581483
 GameObject:
   m_ObjectHideFlags: 0
@@ -1652,7 +1574,6 @@ GameObject:
   - component: {fileID: 1875755924}
   - component: {fileID: 1875755923}
   - component: {fileID: 1875755922}
-  - component: {fileID: 1875755925}
   m_Layer: 0
   m_Name: WallTop (1)
   m_TagString: Wall
@@ -1727,15 +1648,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1875755920}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1875755925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1875755920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e699c3a2a2674374497adaafccdc1008, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colliderModel: {fileID: 11400000, guid: e595f9d136f270f4a8fb94045c27e04c, type: 2}
