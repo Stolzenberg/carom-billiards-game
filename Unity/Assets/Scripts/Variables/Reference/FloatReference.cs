@@ -21,6 +21,18 @@ namespace CaromBilliardsGame.Stolzenberg.Variables
         public float Value
         {
             get { return UseConstant ? ConstantValue : Variable.Value; }
+
+            set
+            {
+                if (UseConstant)
+                {
+                    ConstantValue = value;
+                }
+                else
+                {
+                    Variable.Value = value;
+                }
+            }
         }
 
         public static implicit operator float(FloatReference reference)
