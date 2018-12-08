@@ -44,7 +44,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -58,7 +58,7 @@ LightmapSettings:
     serializedVersion: 10
     m_Resolution: 2
     m_BakeResolution: 10
-    m_AtlasSize: 512
+    m_AtlasSize: 1024
     m_AO: 0
     m_AOMaxDistance: 1
     m_CompAOExponent: 1
@@ -89,7 +89,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000002, guid: ebb535c2bb0a21442a8f1c3b71654af6,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -359,7 +360,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &233776910
 Transform:
@@ -520,7 +521,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 15.000001, y: 0, z: 0}
 --- !u!1 &394145054
 GameObject:
@@ -562,6 +563,7 @@ GameObject:
   - component: {fileID: 508418138}
   - component: {fileID: 508418137}
   - component: {fileID: 508418136}
+  - component: {fileID: 508418140}
   m_Layer: 0
   m_Name: RedBallController
   m_TagString: Ball
@@ -580,10 +582,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dacc968716e5344bbb663b942b9dafb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballModel: {fileID: 11400000, guid: 2717cd70784669844b74d5dcfe356579, type: 2}
+  ballModel: {fileID: 11400000, guid: 26ad1eab45160254a8f40e01afe67ec8, type: 2}
+  audioController: {fileID: 508418140}
   sphereCol: {fileID: 508418138}
   rigid: {fileID: 508418137}
   viewTransform: {fileID: 1839489469}
+  ballHitBall: {fileID: 11400000, guid: 9630a76ea66cfcb4fb8b57bc96c808f0, type: 2}
+  ballHitWall: {fileID: 11400000, guid: f6481e5b1e5713541b1b3c440b6fc82b, type: 2}
 --- !u!54 &508418137
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -618,13 +623,25 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 508418135}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.5, y: 0, z: 6}
+  m_LocalPosition: {x: 12, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 542909487}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &508418140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 508418135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9351f9dc2751e174dbdfdc27e2d3459f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioModel: {fileID: 11400000, guid: a81314dcc0c671d4abf8370f6b20f087, type: 2}
 --- !u!1 &538514685
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,7 +658,7 @@ GameObject:
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &538514686
 Transform:
@@ -783,6 +800,9 @@ GameObject:
   - component: {fileID: 733501867}
   - component: {fileID: 733501866}
   - component: {fileID: 733501870}
+  - component: {fileID: 733501871}
+  - component: {fileID: 733501872}
+  - component: {fileID: 733501873}
   m_Layer: 0
   m_Name: WhiteBallController
   m_TagString: Ball
@@ -804,7 +824,9 @@ MonoBehaviour:
   playerModel: {fileID: 11400000, guid: ecbd8ee1200cd5d41974105b7cfee0fe, type: 2}
   cameraController: {fileID: 282840812}
   ballController: {fileID: 733501870}
+  audioController: {fileID: 733501871}
   sphereCol: {fileID: 733501868}
+  playerSwingQueue: {fileID: 11400000, guid: a6959769e9a187c499ff604d1c85362b, type: 2}
   pressedTimeReference:
     UseConstant: 0
     ConstantValue: 0
@@ -848,7 +870,7 @@ Transform:
   m_Children:
   - {fileID: 1646581484}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &733501870
 MonoBehaviour:
@@ -862,9 +884,63 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballModel: {fileID: 11400000, guid: 2717cd70784669844b74d5dcfe356579, type: 2}
+  audioController: {fileID: 733501871}
   sphereCol: {fileID: 733501868}
   rigid: {fileID: 733501867}
   viewTransform: {fileID: 168859384}
+  ballHitBall: {fileID: 11400000, guid: 9630a76ea66cfcb4fb8b57bc96c808f0, type: 2}
+  ballHitWall: {fileID: 11400000, guid: f6481e5b1e5713541b1b3c440b6fc82b, type: 2}
+--- !u!114 &733501871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 733501865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9351f9dc2751e174dbdfdc27e2d3459f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioModel: {fileID: 11400000, guid: a81314dcc0c671d4abf8370f6b20f087, type: 2}
+--- !u!114 &733501872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 733501865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02df93df1bbc6aa438010600854b109b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &733501873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 733501865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e839e4c12473014b9b3d3faccc0f61d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: a6959769e9a187c499ff604d1c85362b, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 733501872}
+        m_MethodName: ResetHittenBallsList
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &775651644
 GameObject:
   m_ObjectHideFlags: 0
@@ -935,6 +1011,106 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 775651644}
   m_CullTransparentMesh: 0
+--- !u!1001 &794719895
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 224868396854402048, guid: 8c8a353a0c8a8e949b1304a134e2fd8d,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224868396854402048, guid: 8c8a353a0c8a8e949b1304a134e2fd8d,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224868396854402048, guid: 8c8a353a0c8a8e949b1304a134e2fd8d,
+        type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224868396854402048, guid: 8c8a353a0c8a8e949b1304a134e2fd8d,
+        type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224868396854402048, guid: 8c8a353a0c8a8e949b1304a134e2fd8d,
+        type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224868396854402048, guid: 8c8a353a0c8a8e949b1304a134e2fd8d,
+        type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224868396854402048, guid: 8c8a353a0c8a8e949b1304a134e2fd8d,
+        type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224868396854402048, guid: 8c8a353a0c8a8e949b1304a134e2fd8d,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224868396854402048, guid: 8c8a353a0c8a8e949b1304a134e2fd8d,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224868396854402048, guid: 8c8a353a0c8a8e949b1304a134e2fd8d,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224868396854402048, guid: 8c8a353a0c8a8e949b1304a134e2fd8d,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 224868396854402048, guid: 8c8a353a0c8a8e949b1304a134e2fd8d,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 224868396854402048, guid: 8c8a353a0c8a8e949b1304a134e2fd8d,
+        type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224868396854402048, guid: 8c8a353a0c8a8e949b1304a134e2fd8d,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224868396854402048, guid: 8c8a353a0c8a8e949b1304a134e2fd8d,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224868396854402048, guid: 8c8a353a0c8a8e949b1304a134e2fd8d,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224868396854402048, guid: 8c8a353a0c8a8e949b1304a134e2fd8d,
+        type: 2}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224868396854402048, guid: 8c8a353a0c8a8e949b1304a134e2fd8d,
+        type: 2}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8c8a353a0c8a8e949b1304a134e2fd8d, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &981368045
 GameObject:
   m_ObjectHideFlags: 0
@@ -967,7 +1143,7 @@ RectTransform:
   - {fileID: 144237607}
   - {fileID: 775651645}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1020,7 +1196,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 282840813}
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1135,7 +1311,7 @@ GameObject:
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1408952457
 Transform:
@@ -1251,7 +1427,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.25943398, g: 1, b: 0.5455857, a: 1}
+  m_Color: {r: 1, g: 0.73530996, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1289,7 +1465,7 @@ GameObject:
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1644555582
 Transform:
@@ -1369,6 +1545,7 @@ GameObject:
   - component: {fileID: 1646180719}
   - component: {fileID: 1646180718}
   - component: {fileID: 1646180717}
+  - component: {fileID: 1646180721}
   m_Layer: 0
   m_Name: YellowBallController
   m_TagString: Ball
@@ -1387,10 +1564,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dacc968716e5344bbb663b942b9dafb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballModel: {fileID: 11400000, guid: 2717cd70784669844b74d5dcfe356579, type: 2}
+  ballModel: {fileID: 11400000, guid: 043d8bcd8bd10dc4099d2a78c3a5d778, type: 2}
+  audioController: {fileID: 1646180721}
   sphereCol: {fileID: 1646180719}
   rigid: {fileID: 1646180718}
   viewTransform: {fileID: 1301613820}
+  ballHitBall: {fileID: 11400000, guid: 9630a76ea66cfcb4fb8b57bc96c808f0, type: 2}
+  ballHitWall: {fileID: 11400000, guid: f6481e5b1e5713541b1b3c440b6fc82b, type: 2}
 --- !u!54 &1646180718
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1425,13 +1605,25 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1646180716}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 6}
+  m_LocalPosition: {x: -12, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 394145055}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1646180721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1646180716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9351f9dc2751e174dbdfdc27e2d3459f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioModel: {fileID: 11400000, guid: a81314dcc0c671d4abf8370f6b20f087, type: 2}
 --- !u!1 &1646581483
 GameObject:
   m_ObjectHideFlags: 0
@@ -1489,7 +1681,7 @@ Transform:
   - {fileID: 170076735}
   - {fileID: 54968170}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1839489468
 GameObject:
@@ -1579,7 +1771,7 @@ GameObject:
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1875755921
 Transform:
