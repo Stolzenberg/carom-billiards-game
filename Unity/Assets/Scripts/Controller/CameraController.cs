@@ -5,6 +5,7 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
 {
     public class CameraController : MonoBehaviour
     {
+        [Header("References")]
         [SerializeField] private FloatReference rotationSpeed;
         [SerializeField] private Transform target;
 

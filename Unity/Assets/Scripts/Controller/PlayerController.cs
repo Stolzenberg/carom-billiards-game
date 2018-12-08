@@ -1,4 +1,5 @@
 ﻿using System;
+using CaromBilliardsGame.Stolzenberg.Events;
 using CaromBilliardsGame.Stolzenberg.Models;
 using CaromBilliardsGame.Stolzenberg.Variables;
 using UnityEngine;
@@ -13,9 +14,12 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         [Header("Controllers")]
         [SerializeField] private CameraController cameraController;
         [SerializeField] private BallController ballController;
+        [SerializeField] private AudioController audioController;
         [Header("Components")]
         [SerializeField] private SphereCollider sphereCol;
-        [Header("Variables")]
+        [Header("Events")]
+        [SerializeField] private GameEvent playerSwingQueue;
+        [Header("References")]
         [SerializeField] private FloatReference pressedTimeReference;
 
         private void Update()
@@ -71,6 +75,8 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
                 if (!ballController.IsMoving)
                 {
                     ballController.ApplyForceToBall(transform.forward, playerModel.Force * pressedTime);
+                    playerSwingQueue.Raise();
+                    audioController.PlaySwingQueueClip();
                     pressedTime = 0;
                 }
             }
