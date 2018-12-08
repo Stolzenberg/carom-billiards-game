@@ -1,4 +1,5 @@
-﻿using CaromBilliardsGame.Stolzenberg.Models;
+﻿using CaromBilliardsGame.Stolzenberg.Events;
+using CaromBilliardsGame.Stolzenberg.Models;
 using UnityEngine;
 
 namespace CaromBilliardsGame.Stolzenberg.Controllers
@@ -8,28 +9,48 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
     public class BallController : MonoBehaviour
     {
         internal bool IsMoving { get; set; }
+        internal BallModel BallModel { get { return ballModel; } }
 
         [Header("Model")]
         [SerializeField] private BallModel ballModel;
+        [Header("Controllers")]
+        [SerializeField] private AudioController audioController;
         [Header("Components")]
         [SerializeField] private SphereCollider sphereCol;
         [SerializeField] private Rigidbody rigid;
         [SerializeField] private Transform viewTransform;
-        
+        [Header("Events")]
+        [SerializeField] private GameEvent ballHitBall;
+        [SerializeField] private GameEvent ballHitWall;
+
         private float velocity;
 
         private void Awake()
         {
-            sphereCol.radius = ballModel.Size / 2;
-            viewTransform.localScale = Vector3.one * ballModel.Size;
-            rigid.drag = ballModel.Drag;
+            sphereCol.radius = BallModel.Size / 2;
+            viewTransform.localScale = Vector3.one * BallModel.Size;
+            rigid.drag = BallModel.Drag;
         }
 
         private void Update()
         {
             CheckIfMoving();
         }
- 
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.transform.CompareTag("Wall"))
+            {
+                ballHitWall.Raise();
+                audioController.PlayHitWallClip();
+    }
+            if (collision.transform.CompareTag("Ball"))
+            {
+                ballHitBall.Raise();
+                audioController.PlayHitBallClip();
+            }
+        }
+
         internal void ApplyForceToBall(Vector3 direction, float velocity)
         {
             rigid.AddForce(direction * velocity, ForceMode.Impulse);
@@ -37,7 +58,7 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
 
         private void CheckIfMoving()
         {
-            if (rigid.velocity.magnitude <= 1)
+            if (rigid.velocity.magnitude <= BallModel.MoveThreshHold)
             {
                 IsMoving = false;
             }
