@@ -1,4 +1,6 @@
-﻿using CaromBilliardsGame.Stolzenberg.Models;
+﻿using CaromBilliardsGame.Stolzenberg.Events;
+using CaromBilliardsGame.Stolzenberg.Models;
+using CaromBilliardsGame.Stolzenberg.Variables;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +8,26 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
 {
     public class ScoreController : MonoBehaviour
     {
+        [Header("Events")]
+        [SerializeField] private GameEvent playerScored;
+        [Header("References")]
+        [SerializeField] private IntReference pointsReference;
+        [SerializeField] private FloatReference playTimeReference;
+
         private List<BallModel.BallTypeEnum> hittenBallsList = new List<BallModel.BallTypeEnum>();
+        private float startTime;
+
+        private void Awake()
+        {
+            pointsReference.Value = 0;
+
+            startTime = Time.time;
+        }
+
+        private void Update()
+        {
+            playTimeReference.Value = Time.time - startTime;
+        }
 
         private void OnCollisionEnter(Collision collision)
         {
@@ -23,7 +44,8 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
 
                 if (hittenBallsList.Contains(BallModel.BallTypeEnum.Red) && hittenBallsList.Contains(BallModel.BallTypeEnum.Yellow))
                 {
-                    print("Ja moin");
+                    OnPlayerScored();
+                    playerScored.Raise();
                 }
             }
         }
@@ -31,6 +53,13 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         public void ResetHittenBallsList()
         {
             hittenBallsList.Clear();
+        }
+        
+        private void OnPlayerScored()
+        {
+            pointsReference.Value++;
+
+            ResetHittenBallsList();
         }
     }
 }

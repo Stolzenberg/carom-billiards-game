@@ -13,7 +13,7 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
 
         private void Start()
         {
-            offset = new Vector3(target.position.x, transform.position.y, transform.position.z);
+            offset = transform.position - target.transform.position;
         }
 
         private void LateUpdate()

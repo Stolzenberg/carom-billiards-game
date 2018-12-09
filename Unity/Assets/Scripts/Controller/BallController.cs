@@ -42,12 +42,18 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
             if (collision.transform.CompareTag("Wall"))
             {
                 ballHitWall.Raise();
-                audioController.PlayHitWallClip();
-    }
+                if (audioController != null)
+                {
+                    audioController.PlayHitWallClip(collision.relativeVelocity.magnitude);
+                }
+            }
             if (collision.transform.CompareTag("Ball"))
             {
                 ballHitBall.Raise();
-                audioController.PlayHitBallClip();
+                if (audioController != null)
+                {
+                    audioController.PlayHitBallClip(collision.relativeVelocity.magnitude);
+                }
             }
         }
 

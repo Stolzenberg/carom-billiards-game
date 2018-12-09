@@ -13,5 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BallType: 0
   Size: 1
-  Drag: 0.101
+  Drag: 0.01
   MoveThreshHold: 1

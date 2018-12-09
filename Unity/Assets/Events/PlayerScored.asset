@@ -8,10 +8,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81f3bc604d01e8a48973858a679aecdb, type: 3}
-  m_Name: YellowBall
+  m_Script: {fileID: 11500000, guid: afde042156902ab4b9521d2a74eb2466, type: 3}
+  m_Name: PlayerScored
   m_EditorClassIdentifier: 
-  BallType: 2
-  Size: 1
-  Drag: 0
-  MoveThreshHold: 1

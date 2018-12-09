@@ -8,22 +8,25 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         [Header("Model")]
         [SerializeField] private AudioModel audioModel;
 
-        public void PlaySwingQueueClip()
+        public void PlaySwingQueueClip(float pressedTime)
         {
-            CreateAudioSourceObj(audioModel.SwingQueueClip);
+            float soundVolume = pressedTime;
+            CreateAudioSourceObj(audioModel.SwingQueueClip, soundVolume);
         }
 
-        public void PlayHitWallClip()
+        public void PlayHitWallClip(float hitVelocity)
         {
-            CreateAudioSourceObj(audioModel.HitWallClip);
+            float soundVolume = hitVelocity / 50;
+            CreateAudioSourceObj(audioModel.HitWallClip, soundVolume);
         }
 
-        public void PlayHitBallClip()
+        public void PlayHitBallClip(float hitVelocity)
         {
-            CreateAudioSourceObj(audioModel.HitBallClip);
+            float soundVolume = hitVelocity / 50;
+            CreateAudioSourceObj(audioModel.HitBallClip, soundVolume);
         }
 
-        private void CreateAudioSourceObj(AudioClip audioClip)
+        private void CreateAudioSourceObj(AudioClip audioClip, float volume)
         {
             GameObject gameObj = new GameObject();
             gameObj.name = "AudioSource";
@@ -31,9 +34,10 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
 
             AudioSource audioSource = gameObj.AddComponent<AudioSource>();
             audioSource.clip = audioClip;
-            audioSource.Play();
             audioSource.maxDistance = 1.0f;
+            audioSource.volume = volume;
 
+            audioSource.Play();
             Destroy(gameObj, audioSource.clip.length);
         }
     }

@@ -8,10 +8,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81f3bc604d01e8a48973858a679aecdb, type: 3}
-  m_Name: YellowBall
+  m_Script: {fileID: 11500000, guid: 752e17b1c2ee4024cbd62ef5ad388e48, type: 3}
+  m_Name: Points
   m_EditorClassIdentifier: 
-  BallType: 2
-  Size: 1
-  Drag: 0
-  MoveThreshHold: 1
+  DeveloperDescription: The value of points that the player has.
+  Value: 0

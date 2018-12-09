@@ -21,6 +21,13 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         [SerializeField] private GameEvent playerSwingQueue;
         [Header("References")]
         [SerializeField] private FloatReference pressedTimeReference;
+        [SerializeField] private IntReference shotsReference;
+
+        private void Awake()
+        {
+            pressedTimeReference.Value = 0;
+            shotsReference.Value = 0;
+        }
 
         private void Update()
         {
@@ -40,48 +47,47 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
 
         private void GetPressedTime()
         {
-            float pressedTime = pressedTimeReference.Value;
-
             if (Input.GetKey(KeyCode.Space))
             {
                 if (!ballController.IsMoving)
                 {
-                    if (pressedTime <= 1)
+                    if (pressedTimeReference.Value <= 1)
                     {
-                        pressedTime += playerModel.TimeToFullPower * Time.deltaTime;
+                        pressedTimeReference.Value += playerModel.TimeToFullPower * Time.deltaTime;
                     }
                 }
 
             }
             else
             {
-                if (pressedTime >= 0)
+                if (pressedTimeReference.Value >= 0)
                 {
-                    pressedTime -= playerModel.TimeToFullPower * Time.deltaTime;
+                    pressedTimeReference.Value -= playerModel.TimeToFullPower * Time.deltaTime;
                 }
             }
 
-            pressedTime = Mathf.Clamp(pressedTime, 0, 1);
-
-            pressedTimeReference.Value = pressedTime;
+            pressedTimeReference.Value = Mathf.Clamp(pressedTimeReference.Value, 0, 1);
         }
          
         private void ApplyForceToBall()
         {
-            float pressedTime = pressedTimeReference.Value;
-
             if (Input.GetKeyUp(KeyCode.Space))
             {
                 if (!ballController.IsMoving)
                 {
-                    ballController.ApplyForceToBall(transform.forward, playerModel.Force * pressedTime);
+                    ballController.ApplyForceToBall(transform.forward, playerModel.Force * pressedTimeReference.Value);
+
+                    if (audioController != null)
+                    {
+                        audioController.PlaySwingQueueClip(pressedTimeReference.Value);
+                    }
+
+                    shotsReference.Value++;
+                    pressedTimeReference.Value = 0;
+
                     playerSwingQueue.Raise();
-                    audioController.PlaySwingQueueClip();
-                    pressedTime = 0;
                 }
             }
-
-            pressedTimeReference.Value = pressedTime;
         }
     }
 }
