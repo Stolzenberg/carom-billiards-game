@@ -1,7 +1,7 @@
-﻿using System;
-using CaromBilliardsGame.Stolzenberg.Variables;
+﻿using CaromBilliardsGame.Stolzenberg.Variables;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace CaromBilliardsGame.Stolzenberg.Controllers
@@ -9,7 +9,6 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
     public class UserInterfaceController : MonoBehaviour
     {
         [Header("Components")]
-        [SerializeField] private Image chargeBarSprite;
         [SerializeField] private Image chargeArrowSprite;
         [SerializeField] private TMP_Text timerText;
         [SerializeField] private TMP_Text shotsText;
@@ -21,6 +20,7 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         [SerializeField] private FloatReference timeReference;
         [SerializeField] private Color emptyColor;
         [SerializeField] private Color fullColor;
+        [SerializeField] private GameObject gameOverScreenPref;
 
         private void Awake()
         {
@@ -36,8 +36,8 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
 
         private void UpdateTimeText()
         {
-            string minutes = ((int)timeReference.Value / 60).ToString("");
-            string seconds = (timeReference.Value % 60).ToString("f0");
+            string minutes = ((int)timeReference.Value / 60).ToString("00");
+            string seconds = (timeReference.Value % 60).ToString("00");
 
             timerText.text = minutes + ":" + seconds;
         }
@@ -52,11 +52,14 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
             shotsText.text = shotsReference.Value.ToString("00");
         }
 
+        public void OnGameOver()
+        {
+            Instantiate(gameOverScreenPref, transform);
+        }
+
         private void SetChargeArrow()
         {
-            chargeBarSprite.fillAmount = Mathf.Clamp01(pressedTimeReference.Value / 1);
-            chargeBarSprite.color = Color.Lerp(emptyColor, fullColor, chargeBarSprite.fillAmount);
-
+            chargeArrowSprite.color = Color.Lerp(emptyColor, fullColor, chargeArrowSprite.fillAmount);
             chargeArrowSprite.fillAmount = Mathf.Clamp01(pressedTimeReference.Value / 1);
         }
     }

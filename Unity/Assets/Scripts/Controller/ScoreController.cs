@@ -8,8 +8,11 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
 {
     public class ScoreController : MonoBehaviour
     {
+        private const int pointsToWin = 3;
+
         [Header("Events")]
         [SerializeField] private GameEvent playerScored;
+        [SerializeField] private GameEvent onGameOver;
         [Header("References")]
         [SerializeField] private IntReference pointsReference;
         [SerializeField] private FloatReference playTimeReference;
@@ -60,6 +63,11 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
             pointsReference.Value++;
 
             ResetHittenBallsList();
+
+            if (pointsReference.Value == pointsToWin)
+            {
+                onGameOver.Raise();
+            }
         }
     }
 }
