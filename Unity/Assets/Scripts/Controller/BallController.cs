@@ -22,8 +22,8 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         [Header("Events")]
         [SerializeField] private GameEvent ballHitBall;
         [SerializeField] private GameEvent ballHitWall;
-
-        private float velocity;
+        
+        private Vector3 lastFrameVelocity;
 
         private void Awake()
         {
@@ -35,6 +35,8 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         private void Update()
         {
             CheckIfMoving();
+
+            lastFrameVelocity = rigid.velocity;
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -46,6 +48,8 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
                 {
                     audioController.PlayHitWallClip(collision.relativeVelocity.magnitude);
                 }
+
+                Bounce(collision.contacts[0].normal);
             }
             if (collision.transform.CompareTag("Ball"))
             {
@@ -72,6 +76,14 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
             {
                 IsMoving = true;
             }
+        }
+
+        internal void Bounce(Vector3 collisionNormal)
+        {
+            var newSpeed = lastFrameVelocity.magnitude / 2;
+            var direction = Vector3.Reflect(lastFrameVelocity.normalized, collisionNormal);
+
+            rigid.velocity = direction * newSpeed;
         }
     }
 }
