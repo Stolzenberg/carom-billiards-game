@@ -10,6 +10,8 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
     {
         private const int pointsToWin = 3;
 
+        [Header("Controllers")]
+        [SerializeField] private AudioController audioController;
         [Header("Events")]
         [SerializeField] private GameEvent playerScored;
         [SerializeField] private GameEvent onGameOver;
@@ -49,6 +51,7 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
                 {
                     OnPlayerScored();
                     playerScored.Raise();
+                    audioController.PlayerEarnPointClip();
                 }
             }
         }
@@ -67,6 +70,7 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
             if (pointsReference.Value == pointsToWin)
             {
                 onGameOver.Raise();
+                audioController.GameOverSoundClip();
             }
         }
     }

@@ -1,44 +1,57 @@
 ﻿using CaromBilliardsGame.Stolzenberg.Models;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace CaromBilliardsGame.Stolzenberg.Controllers
 {
     public class AudioController : MonoBehaviour
     {
-        [Header("Model")]
+        [Header("Components")]
+        [SerializeField] private AudioMixer audioMixer;
+        [Header("Models")]
         [SerializeField] private AudioModel audioModel;
 
-        public void PlaySwingQueueClip(float pressedTime)
+        internal void PlaySwingQueueClip(float pressedTime)
         {
             float soundVolume = pressedTime;
             CreateAudioSourceObj(audioModel.SwingQueueClip, soundVolume);
         }
 
-        public void PlayHitWallClip(float hitVelocity)
+        internal void PlayHitWallClip(float hitVelocity)
         {
             float soundVolume = hitVelocity / 50;
             CreateAudioSourceObj(audioModel.HitWallClip, soundVolume);
         }
 
-        public void PlayHitBallClip(float hitVelocity)
+        internal void PlayHitBallClip(float hitVelocity)
         {
             float soundVolume = hitVelocity / 50;
             CreateAudioSourceObj(audioModel.HitBallClip, soundVolume);
         }
 
-        private void CreateAudioSourceObj(AudioClip audioClip, float volume)
+        internal void PlayerEarnPointClip()
+        {
+            CreateAudioSourceObj(audioModel.EarnPointClip, 1.0f);
+        }
+
+        internal void GameOverSoundClip()
+        {
+            CreateAudioSourceObj(audioModel.WinClip, 1.0f);
+        }
+
+        private void CreateAudioSourceObj(AudioClass audioClass, float volume)
         {
             GameObject gameObj = new GameObject();
             gameObj.name = "AudioSource";
             gameObj.transform.position = transform.position;
 
             AudioSource audioSource = gameObj.AddComponent<AudioSource>();
-            audioSource.clip = audioClip;
-            audioSource.maxDistance = 1.0f;
+            audioSource.clip = audioClass.AudioClip;
             audioSource.volume = volume;
+            audioSource.outputAudioMixerGroup = audioClass.AudioMixerGroup;
 
             audioSource.Play();
             Destroy(gameObj, audioSource.clip.length);
-        }
+        }       
     }
 }

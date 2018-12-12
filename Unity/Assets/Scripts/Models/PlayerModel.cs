@@ -2,7 +2,7 @@
 
 namespace CaromBilliardsGame.Stolzenberg.Models
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "Models/Player")]
     public class PlayerModel : ScriptableObject
     {
         public float TimeToFullPower;

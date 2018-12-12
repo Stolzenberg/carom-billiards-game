@@ -9,7 +9,7 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
     [RequireComponent(typeof(SphereCollider))]
     public class PlayerController : MonoBehaviour
     {
-        [Header("Model")]
+        [Header("Models")]
         [SerializeField] private PlayerModel playerModel;
         [Header("Controllers")]
         [SerializeField] private CameraController cameraController;
@@ -38,7 +38,7 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
 
         private void RotateBallWithCamera()
         {
-            if (!ballController.IsMoving)
+            if (!ballController.BallModel.IsMoving)
             {
                 Vector3 rotation = cameraController.transform.eulerAngles;
                 transform.eulerAngles = new Vector3(transform.eulerAngles.x, rotation.y, transform.eulerAngles.z);
@@ -49,7 +49,7 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         {
             if (Input.GetKey(KeyCode.Space))
             {
-                if (!ballController.IsMoving)
+                if (!ballController.BallModel.IsMoving)
                 {
                     if (pressedTimeReference.Value <= 1)
                     {
@@ -73,7 +73,7 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         {
             if (Input.GetKeyUp(KeyCode.Space))
             {
-                if (!ballController.IsMoving)
+                if (!ballController.BallModel.IsMoving)
                 {
                     ballController.ApplyForceToBall(transform.forward, playerModel.Force * pressedTimeReference.Value);
 

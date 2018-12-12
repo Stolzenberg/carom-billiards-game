@@ -2,7 +2,7 @@
 
 namespace CaromBilliardsGame.Stolzenberg.Variables
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "Variables/IntVariable")]
     public class IntVariable : ScriptableObject
     {
 #if UNITY_EDITOR

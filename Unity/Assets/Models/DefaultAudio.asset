@@ -11,6 +11,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c36f6b97f352869439a05d349b34a4a4, type: 3}
   m_Name: DefaultAudio
   m_EditorClassIdentifier: 
-  SwingQueueClip: {fileID: 8300000, guid: f0af3e8b5ce925a478e968d0d7be64d4, type: 3}
-  HitWallClip: {fileID: 8300000, guid: 834a78bc493ea3e409861c0d6a5ee25c, type: 3}
-  HitBallClip: {fileID: 8300000, guid: 393a4c20a14c7054bb96a947bbfb609d, type: 3}
+  SwingQueueClip:
+    AudioClip: {fileID: 8300000, guid: f0af3e8b5ce925a478e968d0d7be64d4, type: 3}
+    AudioMixerGroup: {fileID: 243164356680528788, guid: 49fd33bac67d1184cbbfbc3b61333b18,
+      type: 2}
+  HitWallClip:
+    AudioClip: {fileID: 8300000, guid: 834a78bc493ea3e409861c0d6a5ee25c, type: 3}
+    AudioMixerGroup: {fileID: 243164356680528788, guid: 49fd33bac67d1184cbbfbc3b61333b18,
+      type: 2}
+  HitBallClip:
+    AudioClip: {fileID: 8300000, guid: 393a4c20a14c7054bb96a947bbfb609d, type: 3}
+    AudioMixerGroup: {fileID: 243164356680528788, guid: 49fd33bac67d1184cbbfbc3b61333b18,
+      type: 2}
+  EarnPointClip:
+    AudioClip: {fileID: 8300000, guid: c387f87dff0c0e940a25c851f97a319b, type: 3}
+    AudioMixerGroup: {fileID: 243164356680528788, guid: 49fd33bac67d1184cbbfbc3b61333b18,
+      type: 2}
+  WinClip:
+    AudioClip: {fileID: 8300000, guid: 731568f059601f04580bd7ec20cbf387, type: 3}
+    AudioMixerGroup: {fileID: 243164356680528788, guid: 49fd33bac67d1184cbbfbc3b61333b18,
+      type: 2}

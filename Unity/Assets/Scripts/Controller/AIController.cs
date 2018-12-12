@@ -6,7 +6,7 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
 {
     public class AIController : MonoBehaviour
     {
-        [Header("Model")]
+        [Header("Models")]
         [SerializeField] private AIModel aiModel;
         [Header("Controllers")]
         [SerializeField] private BallController ballController;
@@ -22,7 +22,7 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
 
         private void FindTarget()
         {
-            if (!ballController.IsMoving)
+            if (!ballController.BallModel.IsMoving)
             {
                 Vector3 randPos = Random.insideUnitCircle * aiModel.Inaccuracy;
                 Vector3 targetVector = ballsTransformList[Random.Range(0, ballsTransformList.Count)].position + randPos;
@@ -33,7 +33,7 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
 
         private void ApplyForceToBall()
         {
-            if (!ballController.IsMoving)
+            if (!ballController.BallModel.IsMoving)
             {
                 ballController.ApplyForceToBall(transform.forward, aiModel.Force * Random.Range(0.0f, 1.0f));
             }

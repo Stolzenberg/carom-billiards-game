@@ -928,6 +928,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9351f9dc2751e174dbdfdc27e2d3459f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 49fd33bac67d1184cbbfbc3b61333b18, type: 2}
   audioModel: {fileID: 11400000, guid: a81314dcc0c671d4abf8370f6b20f087, type: 2}
 --- !u!1 &542909486
 GameObject:
@@ -1175,6 +1176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9351f9dc2751e174dbdfdc27e2d3459f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 49fd33bac67d1184cbbfbc3b61333b18, type: 2}
   audioModel: {fileID: 11400000, guid: a81314dcc0c671d4abf8370f6b20f087, type: 2}
 --- !u!114 &733501872
 MonoBehaviour:
@@ -1187,6 +1189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02df93df1bbc6aa438010600854b109b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioController: {fileID: 733501871}
   playerScored: {fileID: 11400000, guid: b25e821516edc0c4fa73e5111014b732, type: 2}
   onGameOver: {fileID: 11400000, guid: e80eab103c7a6de40a3b077ec448689a, type: 2}
   pointsReference:
@@ -2163,6 +2166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9351f9dc2751e174dbdfdc27e2d3459f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 49fd33bac67d1184cbbfbc3b61333b18, type: 2}
   audioModel: {fileID: 11400000, guid: a81314dcc0c671d4abf8370f6b20f087, type: 2}
 --- !u!1 &1646581483
 GameObject:

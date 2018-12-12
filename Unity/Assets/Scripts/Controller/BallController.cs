@@ -8,10 +8,9 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
     [RequireComponent(typeof(Rigidbody))]
     public class BallController : MonoBehaviour
     {
-        internal bool IsMoving { get; set; }
         internal BallModel BallModel { get { return ballModel; } }
 
-        [Header("Model")]
+        [Header("Models")]
         [SerializeField] private BallModel ballModel;
         [Header("Controllers")]
         [SerializeField] private AudioController audioController;
@@ -66,18 +65,6 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
             rigid.AddForce(direction * velocity, ForceMode.Impulse);
         }
 
-        private void CheckIfMoving()
-        {
-            if (rigid.velocity.magnitude <= BallModel.MoveThreshHold)
-            {
-                IsMoving = false;
-            }
-            else
-            {
-                IsMoving = true;
-            }
-        }
-
         internal void Bounce(Vector3 collisionNormal)
         {
             var newSpeed = lastFrameVelocity.magnitude / 2;
@@ -85,5 +72,17 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
 
             rigid.velocity = direction * newSpeed;
         }
+
+        private void CheckIfMoving()
+        {
+            if (rigid.velocity.magnitude <= BallModel.MoveThreshHold)
+            {
+                ballModel.IsMoving = false;
+            }
+            else
+            {
+                ballModel.IsMoving = true;
+            }
+        }        
     }
 }

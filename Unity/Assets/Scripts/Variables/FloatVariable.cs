@@ -2,7 +2,7 @@
 
 namespace CaromBilliardsGame.Stolzenberg.Variables
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "Variables/FloatVariable")]
     public class FloatVariable : ScriptableObject
     {
 #if UNITY_EDITOR
