@@ -9,7 +9,7 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         [Header("Components")]
         [SerializeField] private TMP_Text shotsText;
         [SerializeField] private TMP_Text timerText;
-        [Header("Reference")]
+        [Header("References")]
         [SerializeField] private IntReference shotsReference;
         [SerializeField] private FloatReference timeReference;
 

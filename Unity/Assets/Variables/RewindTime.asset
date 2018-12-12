@@ -8,10 +8,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81f3bc604d01e8a48973858a679aecdb, type: 3}
-  m_Name: WhiteBall
+  m_Script: {fileID: 11500000, guid: 9a256d45a2d7ee241951f6b7be15f36d, type: 3}
+  m_Name: RewindTime
   m_EditorClassIdentifier: 
-  ballType: 0
-  size: 1
-  drag: 0.1
-  moveThreshHold: 0.1
+  DeveloperDescription: "These are the seconds the \nplayer is allowed to rewind."
+  Value: 5

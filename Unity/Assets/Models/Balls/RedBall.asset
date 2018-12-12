@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81f3bc604d01e8a48973858a679aecdb, type: 3}
   m_Name: RedBall
   m_EditorClassIdentifier: 
-  BallType: 1
-  Size: 1
-  Drag: 0.01
-  MoveThreshHold: 1
+  ballType: 1
+  size: 1
+  drag: 0.1
+  moveThreshHold: 0.1

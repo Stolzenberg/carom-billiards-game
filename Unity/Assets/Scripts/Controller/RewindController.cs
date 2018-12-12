@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using CaromBilliardsGame.Stolzenberg.Variables;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace CaromBilliardsGame.Stolzenberg.Controllers
@@ -7,6 +8,8 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
     {
         [Header("Components")]
         [SerializeField] private Rigidbody rigid;
+        [Header("References")]
+        [SerializeField] private FloatReference secondsToRewind;
 
         private List<PointInTime> pointsInTime;
 
@@ -62,13 +65,16 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
 
         private void Record()
         {
-            PointInTime newPointInTime = new PointInTime
+            if (pointsInTime.Count > (1f / Time.fixedDeltaTime))
             {
-                Position = transform.position,
-                Rotation = transform.rotation
-            };
+                PointInTime newPointInTime = new PointInTime
+                {
+                    Position = transform.position,
+                    Rotation = transform.rotation
+                };
 
-            pointsInTime.Insert(0, newPointInTime);
+                pointsInTime.Insert(0, newPointInTime);
+            }            
         }
 
         private void Rewind()

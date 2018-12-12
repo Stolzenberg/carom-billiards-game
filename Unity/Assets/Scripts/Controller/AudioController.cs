@@ -6,10 +6,10 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
 {
     public class AudioController : MonoBehaviour
     {
-        [Header("Components")]
-        [SerializeField] private AudioMixer audioMixer;
         [Header("Models")]
         [SerializeField] private AudioModel audioModel;
+        [Header("Components")]
+        [SerializeField] private AudioMixer audioMixer;
 
         internal void PlaySwingQueueClip(float pressedTime)
         {
