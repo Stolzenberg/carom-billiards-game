@@ -16,16 +16,20 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         [SerializeField] private GameEvent playerScored;
         [SerializeField] private GameEvent onGameOver;
         [Header("References")]
+        [SerializeField] private IntReference shotsReference;
         [SerializeField] private IntReference pointsReference;
         [SerializeField] private FloatReference playTimeReference;
 
         private List<BallModel.BallTypeEnum> hittenBallsList = new List<BallModel.BallTypeEnum>();
+        private SaveGameController saveController;
         private float startTime;
 
         private void Awake()
         {
             pointsReference.Value = 0;
+            playTimeReference.Value = 0;
 
+            saveController = new SaveGameController();
             startTime = Time.time;
         }
 
@@ -71,6 +75,15 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
             {
                 onGameOver.Raise();
                 audioController.GameOverSoundClip();
+
+                SaveGameData newSaveData = new SaveGameData()
+                {
+                    Shots = shotsReference.Value,
+                    Points = pointsReference.Value,
+                    Time = playTimeReference.Value,
+                };
+
+                saveController.SaveGame(newSaveData);
             }
         }
     }

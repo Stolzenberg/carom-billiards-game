@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CaromBilliardsGame.Stolzenberg.Controllers
 {
-    public class AIController : MonoBehaviour
+    public class AIBehaviourController : MonoBehaviour
     {
         [Header("Models")]
         [SerializeField] private AIModel aiModel;

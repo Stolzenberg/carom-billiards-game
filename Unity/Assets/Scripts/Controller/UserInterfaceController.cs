@@ -8,11 +8,15 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
 {
     public class UserInterfaceController : MonoBehaviour
     {
+        [Header("Controllers")]
+        [SerializeField] private BallController playerBallController;
+        [SerializeField] private RewindController playerRewindController;
         [Header("Components")]
         [SerializeField] private Image chargeArrowSprite;
         [SerializeField] private TMP_Text timerText;
         [SerializeField] private TMP_Text shotsText;
         [SerializeField] private TMP_Text pointsText;
+        [SerializeField] private Button rewindButton;
         [Header("Reference")]
         [SerializeField] private FloatReference pressedTimeReference;
         [SerializeField] private IntReference shotsReference;
@@ -20,7 +24,7 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         [SerializeField] private FloatReference timeReference;
         [SerializeField] private Color emptyColor;
         [SerializeField] private Color fullColor;
-        [SerializeField] private GameObject gameOverScreenPref;
+        [SerializeField] private GameObject gameOverScreenCanvas;
 
         private void Awake()
         {
@@ -32,6 +36,15 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         {
             SetChargeArrow();
             UpdateTimeText();
+
+            if (playerBallController.BallModel.IsMoving || playerRewindController.IsRewinding)
+            {
+                rewindButton.interactable = false;
+            }
+            else
+            {
+                rewindButton.interactable = true;
+            }
         }
 
         private void UpdateTimeText()
@@ -54,7 +67,7 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
 
         public void OnGameOver()
         {
-            Instantiate(gameOverScreenPref, transform);
+            gameOverScreenCanvas.SetActive(true);
         }
 
         private void SetChargeArrow()

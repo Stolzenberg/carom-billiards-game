@@ -22,7 +22,7 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         private void UpdateTimeText()
         {
             string minutes = ((int)timeReference.Value / 60).ToString("00");
-            string seconds = (timeReference.Value % 60).ToString("f0");
+            string seconds = (timeReference.Value % 60).ToString("00");
 
             timerText.text = minutes + ":" + seconds;
         }

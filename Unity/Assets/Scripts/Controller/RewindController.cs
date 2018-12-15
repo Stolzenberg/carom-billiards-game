@@ -1,4 +1,4 @@
-﻿using CaromBilliardsGame.Stolzenberg.Variables;
+﻿using CaromBilliardsGame.Stolzenberg.Helpers;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,12 +6,14 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
 {
     public class RewindController : MonoBehaviour
     {
+        public bool IsRewinding { get; private set; }
+        
         [Header("Components")]
         [SerializeField] private Rigidbody rigid;
-        [Header("References")]
-        [SerializeField] private FloatReference secondsToRewind;
+        [Header("Controllers")]
+        [SerializeField] private BallController ballController;
 
-        private List<PointInTime> pointsInTime;
+        [SerializeField] private RingBuffer<PointInTime> pointsInTime;
 
         [System.Serializable]
         private struct PointInTime
@@ -20,76 +22,97 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
             public Quaternion Rotation { get; set; }
         }
 
-        private bool isRewinding;
+        private List<PointInTime> getLastPoints;
+        private bool isRecording;
+        private bool checkIfMoving;
 
         private void Start()
         {
-            pointsInTime = new List<PointInTime>();
-        }
-
-        private void Update()
-        {
-            if (Input.GetMouseButton(0))
-            {
-                StartRewind();
-            }
-            else
-            {
-                StopRewind();
-            }
+            pointsInTime = new RingBuffer<PointInTime>(5000);
         }
 
         private void FixedUpdate()
         {
-            if (isRewinding)
+            if (IsRewinding)
             {
                 Rewind();
             }
-            else
+            if (isRecording)
             {
                 Record();
             }
         }
 
-        internal void StartRewind()
+        public void StartRecording()
         {
-            isRewinding = true;
+            isRecording = true;
+            ballController.BallModel.IsMoving = true;
+
+            Invoke("CheckIfStillMoving", 3f);
+
+        }
+
+        public void StartRewind()
+        {
+            IsRewinding = true;
+
+            getLastPoints = pointsInTime.GetList();
+
             rigid.isKinematic = true;
         }
 
-        internal void StopRewind()
+        private void StopRewind()
         {
-            isRewinding = false;
+            IsRewinding = false;
+            
             rigid.isKinematic = false;
+        }
+
+        private void StopRecording()
+        {
+            isRecording = false;
+            checkIfMoving = false;
         }
 
         private void Record()
         {
-            if (pointsInTime.Count > (1f / Time.fixedDeltaTime))
-            {
-                PointInTime newPointInTime = new PointInTime
-                {
-                    Position = transform.position,
-                    Rotation = transform.rotation
-                };
+            PointInTime newPointInTime = new PointInTime();
 
-                pointsInTime.Insert(0, newPointInTime);
-            }            
+            newPointInTime = new PointInTime
+            {
+                Position = rigid.transform.position,
+                Rotation = rigid.transform.rotation
+            };
+
+            pointsInTime.Add(newPointInTime);
+
+            if (checkIfMoving)
+            {
+                if (!ballController.BallModel.IsMoving)
+                {
+                    StopRecording();
+                }
+            }
         }
 
         private void Rewind()
         {
-            if (pointsInTime.Count > 0)
+            if (getLastPoints.Count > 0)
             {
-                transform.position = pointsInTime[0].Position;
-                transform.rotation = pointsInTime[0].Rotation;
+                transform.position = getLastPoints[0].Position;
+                transform.rotation = getLastPoints[0].Rotation;
 
-                pointsInTime.RemoveAt(0);
+                getLastPoints.RemoveAt(0);
             }
             else
             {
                 StopRewind();
             }
+        }
+
+        private void CheckIfStillMoving()
+        {
+            checkIfMoving = true;
         }
     }
 }

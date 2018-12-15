@@ -12,9 +12,10 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         [Header("Models")]
         [SerializeField] private PlayerModel playerModel;
         [Header("Controllers")]
-        [SerializeField] private CameraController cameraController;
+        [SerializeField] private CameraController cam;
         [SerializeField] private BallController ballController;
         [SerializeField] private AudioController audioController;
+        [SerializeField] private RewindController rewindController;
         [Header("Components")]
         [SerializeField] private SphereCollider sphereCol;
         [Header("Events")]
@@ -34,29 +35,20 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
             GetPressedTime();
             ApplyForceToBall();
             RotateBallWithCamera();
-        }
-
-        private void RotateBallWithCamera()
-        {
-            if (!ballController.BallModel.IsMoving)
-            {
-                Vector3 rotation = cameraController.transform.eulerAngles;
-                transform.eulerAngles = new Vector3(transform.eulerAngles.x, rotation.y, transform.eulerAngles.z);
-            }
+            UpdateMouseState();
         }
 
         private void GetPressedTime()
         {
             if (Input.GetKey(KeyCode.Space))
             {
-                if (!ballController.BallModel.IsMoving)
+                if (!ballController.BallModel.IsMoving && !rewindController.IsRewinding)
                 {
                     if (pressedTimeReference.Value <= 1)
                     {
                         pressedTimeReference.Value += playerModel.TimeToFullPower * Time.deltaTime;
                     }
                 }
-
             }
             else
             {
@@ -68,12 +60,12 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
 
             pressedTimeReference.Value = Mathf.Clamp(pressedTimeReference.Value, 0, 1);
         }
-         
+
         private void ApplyForceToBall()
         {
             if (Input.GetKeyUp(KeyCode.Space))
             {
-                if (!ballController.BallModel.IsMoving)
+                if (!ballController.BallModel.IsMoving && !rewindController.IsRewinding)
                 {
                     ballController.ApplyForceToBall(transform.forward, playerModel.Force * pressedTimeReference.Value);
 
@@ -88,6 +80,20 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
                     playerSwingQueue.Raise();
                 }
             }
+        }
+
+        private void RotateBallWithCamera()
+        {
+            if (!ballController.BallModel.IsMoving)
+            {
+                Vector3 rotation = cam.transform.eulerAngles;
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, rotation.y, transform.eulerAngles.z);
+            }
+        }
+
+        private void UpdateMouseState()
+        {
+            Cursor.visible = !ballController.BallModel.IsMoving;
         }
     }
 }
