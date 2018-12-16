@@ -3,21 +3,16 @@ using UnityEngine;
 
 namespace CaromBilliardsGame.Stolzenberg.Controllers
 {
-    public class Stats : MonoBehaviour
+    public class StatsController : MonoBehaviour
     {
         [Header("Components")]
         [SerializeField] private TMP_Text timerText;
         [SerializeField] private TMP_Text shotsText;
         [SerializeField] private TMP_Text pointsText;
-
-        private SaveGameController saveController;
-
-
+                
         private void Awake()
         {
-            saveController = new SaveGameController();
-
-            SaveGameData data = saveController.LoadGame();
+            SaveGameData data = SaveGameController.LoadGame();
 
             shotsText.text = data.Shots.ToString("00");
             pointsText.text = data.Points.ToString("00");

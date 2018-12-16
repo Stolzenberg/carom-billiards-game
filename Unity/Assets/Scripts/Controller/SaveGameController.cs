@@ -1,55 +1,42 @@
-﻿
-
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace CaromBilliardsGame.Stolzenberg.Controllers
 {
     [System.Serializable]
     public struct SaveGameData
     {
-        public int Shots { get; internal set; }
-        public int Points { get; internal set; }
-        public float Time { get; internal set; }
+        public int Shots;
+        public int Points;
+        public float Time;
     }
 
     public class SaveGameController
     {
-        static string path = Application.persistentDataPath + "/game.data";
+        static string SAVE_GAME = "SAVE_GAME";
 
-        public void SaveGame(SaveGameData saveData)
+        public static void SaveGame(SaveGameData saveData)
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            
-            FileStream stream = new FileStream(path, FileMode.Create);
-
-            formatter.Serialize(stream, saveData);
-
-            stream.Close();
+            string saveString = JsonUtility.ToJson(saveData);
+            PlayerPrefs.SetString(SAVE_GAME, saveString);
         }
 
-        public SaveGameData LoadGame()
+        public static SaveGameData LoadGame()
         {
             SaveGameData data = new SaveGameData();
 
-            if (File.Exists(path))
+            if (PlayerPrefs.HasKey(SAVE_GAME))
             {
-                BinaryFormatter formatter = new BinaryFormatter();
+                string saveString = PlayerPrefs.GetString(SAVE_GAME);
+                Debug.Log("Load Data");
 
-                FileStream stream = new FileStream(path, FileMode.Open);
-
-                data = (SaveGameData)formatter.Deserialize(stream);
-                stream.Close();
-
+                data = JsonUtility.FromJson<SaveGameData>(saveString);
             }
             else
             {
-                Debug.LogError("Save file not found in" + path);
+                Debug.LogError("Save file not found!");
             }
 
             return data;
-
         }
     }
 }

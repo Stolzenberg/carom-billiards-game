@@ -21,15 +21,13 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         [SerializeField] private FloatReference playTimeReference;
 
         private List<BallModel.BallTypeEnum> hittenBallsList = new List<BallModel.BallTypeEnum>();
-        private SaveGameController saveController;
         private float startTime;
 
         private void Awake()
         {
             pointsReference.Value = 0;
             playTimeReference.Value = 0;
-
-            saveController = new SaveGameController();
+            
             startTime = Time.time;
         }
 
@@ -83,7 +81,7 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
                     Time = playTimeReference.Value,
                 };
 
-                saveController.SaveGame(newSaveData);
+                SaveGameController.SaveGame(newSaveData);
             }
         }
     }

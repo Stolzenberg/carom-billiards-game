@@ -65,20 +65,19 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         {
             if (Input.GetKeyUp(KeyCode.Space))
             {
-                if (!ballController.BallModel.IsMoving && !rewindController.IsRewinding)
+                if (ballController.BallModel.IsMoving && rewindController.IsRewinding) return;
+
+                ballController.ApplyForceToBall(transform.forward, playerModel.Force * pressedTimeReference.Value);
+
+                if (audioController != null)
                 {
-                    ballController.ApplyForceToBall(transform.forward, playerModel.Force * pressedTimeReference.Value);
-
-                    if (audioController != null)
-                    {
-                        audioController.PlaySwingQueueClip(pressedTimeReference.Value);
-                    }
-
-                    shotsReference.Value++;
-                    pressedTimeReference.Value = 0;
-
-                    playerSwingQueue.Raise();
+                    audioController.PlaySwingQueueClip(pressedTimeReference.Value);
                 }
+
+                shotsReference.Value++;
+                pressedTimeReference.Value = 0;
+
+                playerSwingQueue.Raise();
             }
         }
 
