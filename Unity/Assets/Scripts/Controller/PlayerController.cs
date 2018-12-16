@@ -12,7 +12,7 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         [Header("Models")]
         [SerializeField] private PlayerModel playerModel;
         [Header("Controllers")]
-        [SerializeField] private CameraController cam;
+        [SerializeField] private CameraController camController;
         [SerializeField] private BallController ballController;
         [SerializeField] private AudioController audioController;
         [SerializeField] private RewindController rewindController;
@@ -34,7 +34,7 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         {
             GetPressedTime();
             ApplyForceToBall();
-            RotateBallWithCamera();
+            RotateBallWithCam();
             UpdateMouseState();
         }
 
@@ -42,12 +42,11 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         {
             if (Input.GetKey(KeyCode.Space))
             {
-                if (!ballController.BallModel.IsMoving && !rewindController.IsRewinding)
+                if (ballController.BallModel.IsMoving || rewindController.IsRewinding) return;
+
+                if (pressedTimeReference.Value <= 1)
                 {
-                    if (pressedTimeReference.Value <= 1)
-                    {
-                        pressedTimeReference.Value += playerModel.TimeToFullPower * Time.deltaTime;
-                    }
+                    pressedTimeReference.Value += playerModel.TimeToFullPower * Time.deltaTime;
                 }
             }
             else
@@ -65,7 +64,7 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         {
             if (Input.GetKeyUp(KeyCode.Space))
             {
-                if (ballController.BallModel.IsMoving && rewindController.IsRewinding) return;
+                if (ballController.BallModel.IsMoving || rewindController.IsRewinding) return;
 
                 ballController.ApplyForceToBall(transform.forward, playerModel.Force * pressedTimeReference.Value);
 
@@ -81,11 +80,11 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
             }
         }
 
-        private void RotateBallWithCamera()
+        private void RotateBallWithCam()
         {
             if (!ballController.BallModel.IsMoving)
             {
-                Vector3 rotation = cam.transform.eulerAngles;
+                Vector3 rotation = camController.transform.eulerAngles;
                 transform.eulerAngles = new Vector3(transform.eulerAngles.x, rotation.y, transform.eulerAngles.z);
             }
         }

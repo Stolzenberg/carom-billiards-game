@@ -17,6 +17,8 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         {
             UpdateTimeText();
             UpdateShotCountText();
+
+            Cursor.visible = true;
         }
 
         private void UpdateTimeText()
