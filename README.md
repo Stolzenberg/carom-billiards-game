@@ -8,3 +8,6 @@ I have tried to actively use the Game Architecture with Scriptable Objects princ
 - https://www.youtube.com/watch?v=raQ3iHhE_Kk
 
 I tried to pay attention to performance while editing the test, this is also the reason why I used more SerializeField instead of GetComponent in my scripts. I also tried to use a RingBuffer for the rewind system, feel free to give me feedback about it. 
+
+#Build
+https://drive.google.com/file/d/10PqB_w-_39cRh2GyoncSX2nDJl56k1Rm/view?usp=drivesdk
