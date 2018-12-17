@@ -13,8 +13,6 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
 
         private void Awake()
         {
-            
-
             SetSoundVolume(soundSlider.value);
             SetMusicVolume(musicSlider.value);
         }
