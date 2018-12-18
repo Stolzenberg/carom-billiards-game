@@ -76,6 +76,7 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
 
         private void Record()
         {
+            print("record");
             PointInTime newPointInTime = new PointInTime();
 
             newPointInTime = new PointInTime
