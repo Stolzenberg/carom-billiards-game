@@ -16,6 +16,7 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         [SerializeField] private BallController ballController;
         [SerializeField] private AudioController audioController;
         [SerializeField] private RewindController rewindController;
+        [SerializeField] private BallController[] ballsOnField;
         [Header("Components")]
         [SerializeField] private SphereCollider sphereCol;
         [Header("Events")]
@@ -23,7 +24,7 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         [Header("References")]
         [SerializeField] private FloatReference pressedTimeReference;
         [SerializeField] private IntReference shotsReference;
-
+        
         private void Awake()
         {
             pressedTimeReference.Value = 0;
@@ -42,7 +43,7 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         {
             if (Input.GetKey(KeyCode.Space))
             {
-                if (ballController.BallModel.IsMoving || rewindController.IsRewinding) return;
+                if (IsAnyBallMoving() || rewindController.IsRewinding) return;
 
                 if (pressedTimeReference.Value <= 1)
                 {
@@ -64,7 +65,7 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         {
             if (Input.GetKeyUp(KeyCode.Space))
             {
-                if (ballController.BallModel.IsMoving || rewindController.IsRewinding) return;
+                if (IsAnyBallMoving() || rewindController.IsRewinding) return;
 
                 ballController.ApplyForceToBall(transform.forward, playerModel.Force * pressedTimeReference.Value);
 
@@ -92,6 +93,19 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         private void UpdateMouseState()
         {
             Cursor.visible = !ballController.BallModel.IsMoving;
+        }
+
+        private bool IsAnyBallMoving()
+        {
+            for (int i = 0; i < ballsOnField.Length; ++i)
+            {
+                if (ballsOnField[i].BallModel.IsMoving)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

@@ -16,6 +16,7 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
         [SerializeField] private TMP_Text timerText;
         [SerializeField] private TMP_Text shotsText;
         [SerializeField] private TMP_Text pointsText;
+        [SerializeField] private TMP_Text rewindText;
         [SerializeField] private Button rewindButton;
         [Header("Reference")]
         [SerializeField] private FloatReference pressedTimeReference;
@@ -45,6 +46,8 @@ namespace CaromBilliardsGame.Stolzenberg.Controllers
             {
                 rewindButton.interactable = true;
             }
+
+            rewindText.gameObject.SetActive(playerRewindController.IsRewinding);
         }
 
         private void UpdateTimeText()
