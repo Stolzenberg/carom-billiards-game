@@ -1,4 +1,4 @@
-# carom-billiards-game
+# Carom billiards game
 The project was created with Unity 2018.2.19f1.
 
 This is my application test for BoomByteGames GmbH. Task was to create a singel player carom billiard game in unity. 
@@ -10,7 +10,7 @@ I have tried to actively use the Game Architecture with Scriptable Objects princ
 I tried to pay attention to performance while editing the test, this is also the reason why I used more SerializeField instead of GetComponent in my scripts. I also tried to use a RingBuffer for the rewind system, feel free to give me feedback about it. 
 
 ## Build
-https://drive.google.com/file/d/1F1zocySkPHcfxP_f0-qxv81M0IbQBiTG/view?usp=drivesdk
+https://goo.gl/itiBF3
 
 ## Points of interest
 - Performance
