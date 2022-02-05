@@ -9,9 +9,6 @@ I have tried to actively use the Game Architecture with Scriptable Objects princ
 
 I tried to pay attention to performance while editing the test, this is also the reason why I used more SerializeField instead of GetComponent in my scripts. I also tried to use a RingBuffer for the rewind system, feel free to give me feedback about it. 
 
-## Build
-https://goo.gl/itiBF3
-
 ## Points of interest
 - Performance
 - UI Elements always visible 
